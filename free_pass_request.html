@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Pass Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('{% static "assets/img/fr.png" %}'); /* Add background image */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Add semi-transparent background color to the container */
+            border-radius: 10px; /* Add border radius for a rounded look */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="email"]::placeholder {
+            color: #999;
+        }
+
+        input[type="date"]::placeholder {
+            color: #999;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">Free Pass Form</h2>
+
+{% if message %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+{% endif %}
+{% if form.errors %}
+    <div class="alert alert-danger">
+        {% for field, error in form.errors.items %}
+            {% if field == 'phone_number' %}
+                {{ error }}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+    <form action="{% url 'free_pass_request' %}" method="POST" id="free-pass-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="full_name" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+            <input type="number" name="age" placeholder="Age" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" name="phone_number" placeholder="Phone Number" required>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Email Address (e.g., xyz@gmail.com)" required>
+        </div>
+        <div class="form-group">
+            <input type="date" name="trial_date" placeholder="Choose the day for trial" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById("free-pass-form").addEventListener("submit", function(event){
+        
+        // Redirect to the specified page
+        window.location.href = "{% url 'fpassr' %}";
+    });
+</script>
+
+</body>
+</html>

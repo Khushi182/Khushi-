@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wednesday Schedule</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-image: url('{% static "assets/img/clbacksun.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; 
+        }
+
+        h1 {
+            color: #3498db;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            color: black;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>FlexShredMaster Wednesday Class Schedule</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Class</th>
+                <th>Instructor</th>
+                <th>Contact No.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>7:00 AM - 9.00 AM</td>
+                <td>Yoga Class</td>
+                <td>Khushi Sute</td>
+                <td>8369821430</td>
+            </tr>
+            <tr>
+                <td>1:00 PM - 3.00 PM</td>
+                <td>Kickboxing Class</td>
+                <td>Maaz Shaikh</td>
+                <td>9876890653</td>
+            </tr>
+            <tr>
+                <td>5:00 PM - 7.00 PM</td>
+                <td>Zumba Class</td>
+                <td>Aditi Pawar</td>
+                <td>8789765647</td>
+            </tr>
+            <tr>
+                <td>8:00 PM - 9.00 PM</td>
+                <td>CrossFit Class</td>
+                <td>Omkar Ghag</td>
+                <td>9987656787</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

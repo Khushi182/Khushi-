@@ -1,0 +1,74 @@
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Pass Submitted</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Adjust background color as needed */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Align items in column */
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .ok-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px; /* Add margin to push the button down */
+        }
+
+        .ok-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Adjust form styles */
+        #free-pass-form {
+            margin-top: 20px;
+        }
+        
+        #free-pass-form input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #free-pass-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="{% static 'assets/img/free.png' %}" alt="Free Pass Image" width="400" height="500"><br> <!-- Increased height to 500 -->
+    <button class="ok-button" onclick="redirectToHome()">OK</button>
+</div>
+
+<script>
+    function redirectToHome() {
+        window.location.href = '/'; // Change "home.html" to your home page URL
+    }
+</script>
+
+</body>
+</html>
+

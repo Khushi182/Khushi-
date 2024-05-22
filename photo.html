@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Photos</title>
+    <style>
+        body {
+            background-image: url('{% static "assets/img/fr.png" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .gallery img {
+            width: 30%;
+            margin: 1%;
+            border-radius: 5px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer; /* Add cursor pointer */
+        }
+
+        @media (max-width: 768px) {
+            .gallery img {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery img {
+                width: 90%;
+            }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 9999; /* Sit on top */
+            padding-top: 50px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <img src="{% static 'assets/img/p1.png' %}" alt="Photo 1" onclick="openModal(this)">
+        <img src="{% static 'assets/img/p2.png' %}" alt="Photo 2" onclick="openModal(this)">
+        <img src="{% static 'assets/img/p3.png' %}" alt="Photo 3" onclick="openModal(this)">
+        <img src="{% static 'assets/img/p4.png' %}" alt="Photo 4" onclick="openModal(this)">
+        <img src="{% static 'assets/img/p5.png' %}" alt="Photo 5" onclick="openModal(this)">
+        <img src="{% static 'assets/img/p6.png' %}" alt="Photo 6" onclick="openModal(this)">
+        <img src="{% static 'assets/img/p7.png' %}" alt="Photo 7" onclick="openModal(this)">
+        <img src="{% static 'assets/img/p8.png' %}" alt="Photo 8" onclick="openModal(this)">
+        <img src="{% static 'assets/img/p9.png' %}" alt="Photo 9" onclick="openModal(this)">
+        <img src="{% static 'assets/img/p10.png' %}" alt="Photo 10" onclick="openModal(this)">
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        // Open the Modal
+        function openModal(imgElement) {
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("modalImg");
+            modal.style.display = "block";
+            modalImg.src = imgElement.src;
+        }
+
+        // Close the Modal
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>

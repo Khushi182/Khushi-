@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Classes</title>
+
+    <style>
+        body {
+            background: url('{% static "assets/img/fr.png" %}') center center fixed;
+            background-size: cover;
+            background-position: center;
+            color: orange;
+            font-family: 'Open Sans', sans-serif; 
+        }
+
+        h2 {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        a {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Choose Your Fitness Class</h2>
+
+<!-- Kickboxing Image -->
+<a href="/kickboxing_registration">
+    <img src="{% static 'assets/img/Kickboxing.png' %}" alt="Kickboxing Class">
+</a>
+
+<!-- Zumba Image -->
+<a href="/zumba_registration">
+    <img src="{% static 'assets/img/zumba.png' %}" alt="Zumba Class">
+</a>
+
+<!-- Crossfit Image -->
+<a href="/crossfit_registration">
+    <img src="{% static 'assets/img/crossfit.png' %}" alt="Crossfit Class">
+</a>
+
+<!-- Yoga Image -->
+<a href="/yoga_registration">
+    <img src="{% static 'assets/img/yoga.png' %}" alt="Yoga Class">
+</a>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('{% static  "assets/img/fr.png" %}');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fceed1; 
+            background-color: rgba(0, 0, 0, 0.7); /* Fallback color */
+        }
+
+        h1, p {
+            text-align: center;
+            color: #ffd700; 
+        }
+
+        .receipt {
+            border: 1px solid #7d3cff; 
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.9); 
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+            color: black; 
+        }
+
+        .receipt p {
+            color: black; 
+        }
+
+        button {
+            background-color: #c80e13; 
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-right: 10px; 
+        }
+
+        button.ok-button {
+            background-color: #4CAF50; 
+        }
+
+        button:hover {
+            background-color: #a80c11; 
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Welcome to FlexShredMaster Gym!</h1>
+    </div>
+
+    <h1>Payment Confirmation</h1>
+
+
+    <p>Thank you for choosing the {{ selected_plan }} month plan!</p>
+    <p><strong>First Name:</strong> {{ first_name }}</p>
+    <p><strong>Last Name:</strong> {{ last_name }}</p>
+    <p><strong>Amount:</strong> {{ amount }}</p> 
+    
+    <div class="receipt">
+        <h2>Receipt Details</h2>
+        <p id="date_of_payment"><strong>Date of Payment:</strong></p>
+    </div>
+
+    
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            const formattedDate = new Intl.DateTimeFormat('en-US', options).format(now);
+
+            const dateElement = document.getElementById('date_of_payment');
+            dateElement.textContent = `Date of Payment: ${formattedDate}`;
+        }
+
+        
+        updateDateTime();
+
+        
+        function printReceipt() {
+            window.print();
+        }
+
+    function redirectToHome() {
+            
+        
+            window.location.href = '/';  
+    }
+</script>
+
+
+    <button onclick="printReceipt()">Print Receipt</button>
+    <button class="ok-button" onclick="redirectToHome()">OK</button>
+</body>
+</html>

@@ -1,0 +1,136 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zumba Receipt</title>
+    <style>
+        body {
+            color: #333;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            background: url('{% static "assets/img/Zumb.jpg" %}') center center fixed;
+            background-size: cover;
+        }
+
+        .receipt {
+            max-width: 600px;
+            width: 80%;
+            margin: 20px auto; 
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        h2 {
+            color: #ff6600;
+            margin-bottom: 20px; 
+        }
+
+        p {
+            margin: 15px 0; 
+        }
+
+        #payment-time {
+            font-size: 1.2em; 
+            color: #555; 
+        }
+
+        #thank-you {
+            margin-top: 20px; 
+            font-weight: bold;
+            color: #ff6600;
+        }
+
+        
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px; 
+        }
+
+        .print-button,
+        .redirect-button {
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .print-button {
+            background-color: #e55e00; 
+            color: #fff;
+            border: none;
+        }
+
+        .print-button:hover {
+            background-color: #a80c11;
+        }
+
+        .redirect-button {
+            background-color: #4CAF50; 
+            color: #fff;
+            border: none;
+        }
+
+        .redirect-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="receipt">
+    <h2>Zumba Class Receipt</h2>
+
+    <p><strong>Full Name:</strong> {{ full_name }}</p>
+    <p><strong>Choosen Plan:</strong> {{ payment_option }}</p>
+    <p><strong>Amount:</strong> {{ amount }}</p> 
+
+    <p><strong>Payment Time:</strong> <span id="payment-time"></span></p>
+
+    
+
+    <p id="thank-you">Thank you for being part of FlexShredMaster Gym!</p>
+
+    
+    <div class="button-container">
+    
+        <button class="print-button" onclick="window.print()">Print</button>
+        
+        <button class="redirect-button" onclick="redirectHome()">OK</button>
+    </div>
+</div>
+
+<script>
+    
+    function updatePaymentTime() {
+        var now = new Date();
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        var formattedTime = now.toLocaleDateString('en-US', options);
+        document.getElementById("payment-time").textContent = formattedTime;
+    }
+
+    
+    updatePaymentTime();
+
+    
+    document.getElementById("payment-time").addEventListener("click", function() {
+        updatePaymentTime();
+    });
+
+    
+    function redirectHome() {
+        window.location.href = '/'; 
+    }
+</script>
+
+</body>
+</html>

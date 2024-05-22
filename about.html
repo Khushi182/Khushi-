@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Our Gym</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #653f3f;
+            margin: 0;
+            padding: 20px;
+            background: url('{% static "assets/img/fr.png" %}') center center fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.9); /* Background color with transparency */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Box shadow for container */
+        }
+
+        h1 {
+            text-align: center;
+            color: #bd1738;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            color: #e16161;
+        }
+
+        .quote p {
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>About Us</h1>
+
+        <p>Welcome to Our Gym, your ultimate destination for fitness and well-being! At Our Gym, we believe in empowering our members to lead healthier lives through exercise, nutrition, and community support. Our mission is to provide a safe and motivating environment where individuals of all fitness levels can achieve their goals. Whether you're a beginner looking to kickstart your fitness journey or an experienced athlete striving for new heights, Our Gym has the resources and expertise to support you every step of the way.</p>
+
+        <p>What sets Our Gym apart?</p>
+
+        <ul>
+            <li>We offer state-of-the-art equipment from industry-leading brands.</li>
+            <li>Our certified trainers provide personalized workout plans tailored to your needs.</li>
+            <li>We offer a variety of group fitness classes, including yoga, spin, and HIIT, to keep you motivated and engaged.</li>
+            <li>Our friendly and supportive community will inspire you to push your limits and achieve results you never thought possible.</li>
+            <li>Enjoy our steam room to relax and rejuvenate after your workout.</li>
+            <li>Experience the thrill of kickboxing classes, designed to improve your strength, agility, and cardiovascular health.</li>
+            <li>Join our energetic Zumba sessions for a fun and effective workout that combines dance and fitness.</li>
+            <li>Challenge yourself with our CrossFit workouts, focusing on functional movements performed at high intensity.</li>
+            <li>Find balance and serenity in our yoga classes, which promote flexibility, strength, and mindfulness.</li>
+        </ul>
+
+        <div class="quote">
+            <p>"Fitness is not about being better than someone else. It's about being better than you used to be." - Unknown</p>
+        </div>
+
+        <p>Ready to embark on your fitness journey with us? Claim your free one-day pass today and experience the benefits of Our Gym firsthand!</p>
+    </div>
+</body>
+</html>

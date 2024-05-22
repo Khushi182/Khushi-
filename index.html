@@ -1,0 +1,288 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>FlexShredMaster</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  
+
+  <!-- Favicons -->
+  <link href="static/assets//img/logom.png" rel="icon">
+  <link href="static/assets//img/logom.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/assets//vendor/aos/aos.css" rel="stylesheet">
+  <link href="static/assets//vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets//vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/assets//vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/assets//vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="static/assets//vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="static/assets//vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="static/assets//css/style.css" rel="stylesheet">
+
+  
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+
+      {% comment %} <h1 class="logo me-auto me-lg-0"><a href="/">FlexShredMaster<span></span></a></h1> {% endcomment %} 
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <a href="index.html" class="logo me-auto me-lg-0"><img src="static/assets//img/logo.png" alt="" class="img-fluid"></a>    
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/">HOME</a></li>
+          <li><a class="nav-link scrollto" href="/classes">CLASSES</a></li> 
+          <li class="dropdown"><a href="#"><span>HOURS</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a class="nav-link scrollto" href="/sunday/">SUNDAY: 8am - 5pm</a></li>
+              <li><a class="nav-link scrollto" href="/monday/">MONDAY: 6am - 11pm</a></li>
+              <li><a class="nav-link scrollto" href="/tuesday/">TUESDAY: 6am - 11pm</a></li>
+              <li><a class="nav-link scrollto" href="/wednesday/">WEDNESDAY: 6am - 11pm</a></li>
+              <li><a class="nav-link scrollto" href="/thursday/">THURSDAY: 6am - 11pm</a></li>
+              <li><a class="nav-link scrollto" href="/friday/">FRIDAY: 6am - 11pm</a></li>
+              <li><a class="nav-link scrollto" href="/saturday/">SATURDAY: 6am - 11pm</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>CONTACT</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">☎ +91 8369821430 </a></li>
+              <li><a href="#">☎ +91 9987746352</a></li>
+              <li><a href="#">📧-flexshredmaster@gmail.com</a></li>
+              <li><a href="#"></a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="/membership">MEMBERSHIP</a></li>
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    <nav>
+        <!-- Other navigation links -->
+    
+      {% if user.is_authenticated %}   
+         <p><span style="color: white;">Welcome,{{ user.username }}</span>!</p>
+         <a href="{% url 'handlelogout' %}">Logout</a>
+      {% else %}
+         <a href="{% url 'handlelogin' %}">Login</a>
+      {% endif %}
+    
+   </nav>
+    
+
+   <a class="nav-link scrollto" href="/flyer" style="display: inline-block; color: goldenrod;">OUR GYM</a>
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center justify-content-center" style="background-image: url('{% static "assets/img/bgmain.png" %}');">
+
+    <div class="container" data-aos="fade-up">
+
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-6 col-lg-8">
+          <h1>CHALLENGE YOURSELF<span></span></h1>
+          <h2>You Belong Here</h2>
+        </div>
+      </div>
+
+      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <h3><a class="nav-link scrollto" href="/trainer">OUR TRAINER 💪🏽</a></h3>
+          </div>
+        </div> 
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <h3><a class="nav-link scrollto" href="/free_pass_request">FREE PASS 🏋</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <h3><a class="nav-link scrollto" href="/photo">PHOTOS 📷</a></h3>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-4">
+          <div class="icon-box">
+            <h3><a class="nav-link scrollto" href="/about">ABOUT US 🌎</a></h3>
+          </div>
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Contact Us</p>
+        </div>
+
+        <div>
+          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15082.354918477935!2d72.8345915!3d19.0818117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9a7722f1e63%3A0xb1265d728aa617ca!2zU2FudGFjcnV6IFdlc3QsIOCuruCvgeCuruCvjeCuquCviCwg4K6u4K6V4K6-4K6w4K6-4K634K-N4K6f4K6_4K6w4K6-!5e0!3m2!1sta!2sin!4v1709031995585!5m2!1sta!2sin"  frameborder="0" allowfullscreen></iframe>
+        </div>
+
+
+        <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>Santacruz West Mumbai-400054</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>flexshredmaster@gmail.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>8369821430</p>
+                <p>9987746352</p>
+              </div>
+
+            </div>
+
+          </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Gp<span>.</span></h3>
+              <p>
+                Santacruz West <br>
+                Mumbai-400054, INDIA<br><br>
+                <strong>Phone:</strong> 8369821430<br>9987746352<br>
+                <strong>Email:</strong> flexshredmaster@gmail.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/about">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/flyer">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="membership/">Membership</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/photo">Photos</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="/kickboxing_registration">Kickboxing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/zumba_registration">Zumba</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/crossfit_registration">Crossfit</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/yoga_registration">Yoga</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/trainer">Trainers</a></li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>flexshredmaster</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
+        
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="static/assets//vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="static/assets//vendor/aos/aos.js"></script>
+  <script src="static/assets//vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets//vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="static/assets//vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="static/assets//vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="static/assets//vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assets//js/main.js"></script>
+
+  <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+  <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+  <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+  <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+  <script>
+    window.botpressWebChat.init({
+        "composerPlaceholder": "Chat with FlexShredMaster bot ",
+        "botId": "84d9a86d-9cea-4fef-92a8-ae7f05b04ef0",
+        "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+        "messagingUrl": "https://messaging.botpress.cloud",
+        "clientId": "84d9a86d-9cea-4fef-92a8-ae7f05b04ef0",
+        "webhookId": "58175a3e-4c86-4cbb-848c-d0f4ba6bc9c2",
+        "lazySocket": true,
+        "themeName": "prism",
+        "botName": "FlexShredMaster ChatBot",
+        "avatarUrl": "https://i.pinimg.com/564x/3a/87/9f/3a879f07d46ec94c28e7ca9e6f111790.jpg",
+        "stylesheet": "https://webchat-styler-css.botpress.app/prod/102c5d90-9d52-46b7-9efe-50bf535aada7/v59138/style.css",
+        "frontendVersion": "v1",
+        "useSessionStorage": true,
+        "enableConversationDeletion": true,
+        "theme": "prism",
+        "themeColor": "#2563eb"
+    });
+  </script>
+</body>
+
+</html>

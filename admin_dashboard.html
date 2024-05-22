@@ -1,0 +1,1108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Admin Dashboard</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #b71417; /* Red color for title */
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #4c0763; /* Purple color for welcome message */
+    }
+
+    /* Make the headings of each table in red color and a bit bigger and bold */
+    table th {
+      color: #320e87; /* Red color */
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .dashboard-summary {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .summary-item {
+      background-color: #f2f2f2;
+      padding: 1rem;
+      border-radius: 5px;
+      flex: 1;
+      margin-right: 1rem;
+      text-align: center;
+    }
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 0;
+      color: #3d023f;
+    }
+
+    .registrations-list {
+      margin-top: 2rem;
+    }
+
+    .registration-category {
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .add-member-button-container {
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: inline-block;
+      width: 120px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="date"] {
+      width: calc(100% - 130px);
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    .form-group button[type="submit"] {
+      width: calc(100% - 130px);
+      padding: 0.5rem;
+      box-sizing: border-box;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+    }
+
+    .form-group button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .summary-item:nth-child(odd) {
+      background-color: #ff8080; /* Light red */
+    }
+
+    .summary-item:nth-child(even) {
+      background-color: #80bfff; /* Light blue */
+    }
+
+    /* Total Members */
+    .summary-item:nth-child(1) {
+      background-color: #ff8080; /* Light green */
+    }
+
+    table {
+      background-color: #e9eef4; /* Dark blue */
+      color: #0251a0; /* White text */
+      border: 2px solid #001f3f; /* Dark blue outline */
+    }
+
+    th,
+    td {
+      border: 2px solid #001f3f; /* Dark blue border for table cells */
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    /* Memberships Table */
+  .memberships-table h3 {
+    color: #2a81b7; /* Red color for h3 */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    margin-top: 2rem; /* Additional margin on top */
+  }
+
+  /* Trainers Table */
+  .trainers-table h3 {
+    color: #2a81b7; /* Blue color for h3 */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    margin-top: 2rem; /* Additional margin on top */
+  }
+
+    /* Free Pass Requests Table */
+    .free-pass-requests-table h3 {
+    color: #2a81b7; /* Red color for h3 */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    margin-top: 2rem; /* Additional margin on top */
+  }
+
+  /* Kickboxing Registrations Table */
+  .kickboxing-registrations-table h3 {
+    color: #2a81b7; /* Blue color for h3 */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    margin-top: 2rem; /* Additional margin on top */
+  }
+
+  /* Zumba Registrations Table */
+  .zumba-registrations-table h3 {
+    color: #2a81b7; /* Deep pink color for h3 */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    margin-top: 2rem; /* Additional margin on top */
+  }
+
+  /* Crossfit Registrations Table */
+  .crossfit-registrations-table h3 {
+    color: #2a81b7; /* Green color for h3 */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    margin-top: 2rem; /* Additional margin on top */
+  }
+
+  /* Yoga Registrations Table */
+  .yoga-registrations-table h3 {
+    color: #2a81b7; /* Purple color for h3 */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    margin-top: 2rem; /* Additional margin on top */
+  }
+
+  .add-member-button-container button,
+.add-member-button-container button[type="submit"] {
+  padding: 0.5rem 1rem; /* Increase padding */
+  background-color: #4CAF50; /* Green color */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-member-button-container button:hover,
+.add-member-button-container button[type="submit"]:hover {
+  background-color: #45a050; /* Darker green color on hover */
+}
+
+.delete-button {
+  color: rgb(234, 15, 15);
+}
+
+.form-group label {
+  display: inline-block;
+  width: 150px; /* Fixed width for labels */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"] {
+  width: calc(100% - 160px); /* Adjusted width for inputs */
+  padding: 8px; /* Increased padding for inputs */
+  box-sizing: border-box;
+}
+
+.form-group button[type="submit"] {
+  padding: 0.75rem 1.5rem; /* Medium-sized button */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.small-button {
+  padding: 0.5rem 1rem; /* Adjusted padding for smaller button */
+  font-size: 0.9rem; /* Reduced font size for smaller button */
+}
+
+/* Optionally, you can style the date input field */
+.form-group input[type="date"] {
+  width: calc(100% - 160px); /* Adjusted width */
+  padding: 8px; /* Increased padding */
+  box-sizing: border-box;
+}
+
+.show-more-button button,
+.show-less-button button {
+  padding: 1rem 2rem;
+  background-color: #ff8000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.show-more-button button:hover,
+.show-less-button button:hover {
+  background-color: #ffaa00; /* Changed to orange color on hover */
+}
+
+.form-group button[type="submit"] {
+  padding: 0.3rem 0.8rem; /* Further reduced padding for smaller button */
+  font-size: 0.9rem; /* Further reduced font size */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for the "Add Member" submit button */
+.form-group button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+
+
+
+  </style>
+
+
+
+</head>
+
+<body>
+
+  <div class="container">
+    <h2 style="color: #b71417;">Admin Dashboard</h2>
+    <p style="color: #4c0763;">Welcome, ADMIN!</p>
+
+    <div class="dashboard-summary">
+      <div class="summary-item">
+        <h3>Total Members</h3>
+        <p>{{ total_members }}</p>
+      </div>
+      <div class="summary-item">
+        <h3>Kickboxing Registrations</h3>
+        <p>{{ kickboxing_registrations }}</p>
+      </div>
+      <div class="summary-item">
+        <h3>Zumba Registrations</h3>
+        <p>{{ zumba_registrations }}</p>
+      </div>
+      <div class="summary-item">
+        <h3>Crossfit Registrations</h3>
+        <p>{{ crossfit_registrations }}</p>
+      </div>
+      <div class="summary-item">
+        <h3>Yoga Registrations</h3>
+        <p>{{ yoga_registrations }}</p>
+      </div>
+    </div>
+
+    <div class="registrations-list">
+      <div class="registration-category memberships-table">
+        <div class="add-member-button-container">
+          <button id="add-member-button" onclick="toggleAddMemberForm()">+Add Member</button>
+        </div>
+        <div id="add-member-form" class="hidden">
+          <h3>Add Member</h3>
+          <form method="post" action="{% url 'add_member' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="first_name">First Name:</label>
+              <input type="text" id="first_name" name="first_name">
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name:</label>
+              <input type="text" id="last_name" name="last_name">
+            </div>
+            <div class="form-group">
+              <label for="phone_number">Phone Number:</label>
+              <input type="text" id="phone_number" name="phone_number">
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender:</label>
+              <select id="gender" name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>      
+            </div>
+            <div class="form-group">
+              <label for="date_of_joining">Date of Joining:</label>
+              <input type="date" id="date_of_joining" name="date_of_joining"> <!-- Calendar option -->
+
+            </div>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="text" id="age" name="age">
+            </div>
+            <div class="form-group">
+              <button type="submit">Add Member</button>
+            </div>
+          </form>
+        </div>
+        <h3>Memberships</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>Gender</th>
+              <th>Date of Joining</th>
+              <th>Age</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for membership in all_memberships %}
+            <tr {% if forloop.counter > 3 %}class="hidden"{% endif %}>
+              <td>{{ membership.first_name }} {{ membership.last_name }}</td>
+              <td>{{ membership.phone_number }}</td>
+              <td>{{ membership.gender }}</td>
+              <td>{{ membership.date_of_joining }}</td>
+              <td>{{ membership.age }}</td>
+              <form id="delete-member-form-{{ membership.id }}" action="{% url 'delete_member' membership.id %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" id="member-id-input-{{ membership.id }}" name="member_id" value="">
+                <td><button type="button" class="delete-button" onclick="deleteMember('{{ membership.id }}')">Delete🗑</button></td>
+              </form>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <button id="memberships-table-show-more" class="show-more-button" onclick="toggleEntries('memberships-table')" style="background-color: #fea246;">↓ Show more</button>
+       <button id="memberships-table-show-less" class="show-less-button" style="display: none; background-color: #fea246;" onclick="toggleLessEntries('memberships-table')">↑ Show less</button>
+
+      </div>
+
+      <!-- Add tables for Trainer and Free Pass Request here -->
+      <!-- Trainer Table -->
+      <div class="registration-category trainers-table">
+        <div class="add-member-button-container">
+          <button id="add-trainer-button" onclick="toggleAddTrainerForm()">+Add Trainer</button>
+        </div>
+        <div id="add-trainer-form" class="hidden">
+          <h3>Add Trainer</h3>
+          <form method="post" action="{% url 'add_trainer' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="trainer_full_name">Full Name:</label>
+              <input type="text" id="trainer_full_name" name="trainer_full_name">
+            </div>
+            <div class="form-group">
+              <label for="trainer_age">Age:</label>
+              <input type="text" id="trainer_age" name="trainer_age">
+            </div>
+            <div class="form-group">
+              <label for="trainer_gender">Gender:</label>
+              <select id="trainer_gender" name="trainer_gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+      
+            </div>
+            <div class="form-group">
+              <label for="trainer_email">Email:</label>
+              <input type="email" id="trainer_email" name="trainer_email">
+            </div>
+            <div class="form-group">
+              <label for="trainer_address">Address:</label>
+              <input type="text" id="trainer_address" name="trainer_address">
+            </div>
+            <div class="form-group">
+              <label for="trainer_phone_number">Phone Number:</label>
+              <input type="text" id="trainer_phone_number" name="trainer_phone_number">
+            </div>
+            <div class="form-group">
+              <button type="submit">Add Trainer</button>
+            </div>
+          </form>
+        </div>
+        <h3>Trainers</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Phone Number</th>
+              <th>Action</th> <!-- Added action column for delete button -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for trainer in all_trainers %}
+            <tr {% if forloop.counter > 3 %}class="hidden"{% endif %}>
+              <td>{{ trainer.full_name }}</td>
+              <td>{{ trainer.age }}</td>
+              <td>{{ trainer.gender }}</td>
+              <td>{{ trainer.email }}</td>
+              <td>{{ trainer.address }}</td>
+              <td>{{ trainer.phone_number }}</td>
+              <td>
+                <form id="delete-trainer-form-{{ trainer.id }}" action="{% url 'delete_trainer' trainer.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" id="trainer-id-input-{{ trainer.id }}" name="trainer_id" value="">
+                  <button type="button" class="delete-button"onclick="deleteTrainer('{{ trainer.id }}')">Delete 🗑</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <button id="trainers-table-show-more" onclick="toggleEntries('trainers-table')" style="background-color: #fea246;">↓ Show more</button>
+        <button id="trainers-table-show-less" style="display: none; background-color: #ff8000;" onclick="toggleLessEntries('trainers-table')">↑ Show less</button>
+      </div>
+      
+      <div class="registration-category free-pass-requests-table">
+        <h3>Free Pass Requests</h3>
+        <div class="add-member-button-container">
+          <button id="add-free-pass-request-button" onclick="toggleAddFreePassRequestForm()">+Add</button>
+        </div>
+        <div id="add-free-pass-request-form" class="hidden">
+          <h3>Add Free Pass Request</h3>
+          <form id="free-pass-request-form" method="post" action="{% url 'add_free_pass_request' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="full_name">Full Name:</label>
+              <input type="text" id="full_name" name="full_name">
+            </div>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="text" id="age" name="age">
+            </div>
+            <div class="form-group">
+              <label for="phone_number">Phone Number:</label>
+              <input type="text" id="phone_number" name="phone_number">
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+              <label for="trial_date">Trial Date:</label>
+              <input type="date" id="trial_date" name="trial_date"> <!-- Calendar option -->
+
+            </div>
+            <div class="form-group">
+              <button type="submit">Add Free Pass Request</button>
+            </div>
+          </form>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Age</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>Trial Date</th>
+              <th>Action</th> <!-- Added action column for delete button -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for request in all_free_pass_requests %}
+            <tr {% if forloop.counter > 3 %}class="hidden"{% endif %}>
+              <td>{{ request.full_name }}</td>
+              <td>{{ request.age }}</td>
+              <td>{{ request.phone_number }}</td>
+              <td>{{ request.email }}</td>
+              <td>{{ request.trial_date }}</td>
+              <td>
+                <form id="delete-free-pass-request-form-{{ request.id }}" action="{% url 'delete_free_pass_request' request.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" id="request-id-input-{{ request.id }}" name="request_id" value="{{ request.id }}">
+                  <button type="button" class="delete-button" onclick="deleteFreePassRequest('{{ request.id }}')">Delete🗑</button>
+              </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <button id="free-pass-requests-table-show-more" onclick="toggleEntries('free-pass-requests-table')"style="background-color: #fea246;">↓ Show more</button>
+        <button id="free-pass-requests-table-show-less" style="display: none;background-color: #ff8000;" onclick="toggleLessEntries('free-pass-requests-table')">↑ Show less</button>
+      </div>
+      
+<!-- Kickboxing Registrations Table -->
+<div class="registration-category kickboxing-registrations-table">
+  <h3>Kickboxing Registrations</h3>
+  <div class="add-member-button-container">
+    <button id="add-kickboxing-registration-button" onclick="toggleAddKickboxingRegistrationForm()">+Add</button>
+  </div>
+  <div id="add-kickboxing-registration-form" class="hidden">
+    <h3>Add Kickboxing Registration</h3>
+    <form method="post" action="{% url 'add_kickboxing_registration' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="full_name">Full Name:</label>
+        <input type="text" id="full_name" name="full_name">
+      </div>
+      <div class="form-group">
+        <label for="date_of_joining">Date of Joining:</label>
+        <input type="date" id="date_of_joining" name="date_of_joining"> <!-- Calendar option -->
+      </div>
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age">
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+
+      </div>
+      <div class="form-group">
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number">
+      </div>
+      <div class="form-group">
+        <label for="payment_option">Selected Plan:</label>
+        <select id="payment_option" name="payment_option">
+          <option value="6_months">6 Months</option>
+          <option value="12_months">12 Months</option>
+        </select>
+
+      </div>
+      <div class="form-group">
+        <button type="submit">Add Kickboxing Registration</button>
+      </div>
+    </form>
+  </div>
+  <table>
+    <!-- Table Headers -->
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Phone Number</th>
+        <th>Gender</th>
+        <th>Date of Joining</th>
+        <th>Age</th>
+        <th>Payment Option</th>
+        <th>Action</th> <!-- Added action column for delete button -->
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through Kickboxing registrations -->
+      {% for registration in all_kickboxing_registrations %}
+      <tr {% if forloop.counter > 3 %}class="hidden"{% endif %}>
+        <td>{{ registration.full_name }}</td>
+        <td>{{ registration.phone_number }}</td>
+        <td>{{ registration.gender }}</td>
+        <td>{{ registration.date_of_joining }}</td>
+        <td>{{ registration.age }}</td>
+        <td>{{ registration.payment_option }}</td>
+        <td>
+          <!-- Form for deleting Kickboxing registration -->
+          <form id="delete-kickboxing-registration-form-{{ registration.id }}" action="{% url 'delete_kickboxing_registration' registration.id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="registration-id-input-{{ registration.id }}" name="registration_id" value="">
+            <button type="button"class="delete-button" onclick="deleteKickboxingRegistration('{{ registration.id }}')">Delete🗑</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button id="kickboxing-registrations-table-show-more" onclick="toggleEntries('kickboxing-registrations-table')"style="background-color: #fea246;">↓ Show more</button>
+  <button id="kickboxing-registrations-table-show-less" style="display: none; background-color: #ff8000;" onclick="toggleLessEntries('kickboxing-registrations-table')">↑ Show less</button>
+</div>
+
+
+<div class="registration-category zumba-registrations-table">
+  <h3>Zumba Registrations</h3>
+  <div class="add-member-button-container">
+      <button id="add-zumba-registration-button" onclick="toggleAddZumbaRegistrationForm()">+Add</button>
+  </div>
+  <div id="add-zumba-registration-form" class="hidden">
+      <h3>Add Zumba Registration</h3>
+      <form method="post" action="{% url 'add_zumba_registration' %}">
+          {% csrf_token %}
+          <div class="form-group">
+              <label for="full_name">Full Name:</label>
+              <input type="text" id="full_name" name="full_name">
+          </div>
+          <div class="form-group">
+              <label for="date_of_joining">Date of Joining:</label>
+              <input type="date" id="date_of_joining" name="date_of_joining"> <!-- Calendar option -->
+          </div>
+          <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="text" id="age" name="age">
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>    
+          </div>
+          <div class="form-group">
+              <label for="phone_number">Phone Number:</label>
+              <input type="text" id="phone_number" name="phone_number">
+          </div>
+          <div class="form-group">
+            <label for="payment_option">Selected Plan:</label>
+            <select id="payment_option" name="payment_option">
+              <option value="6_months">6 Months</option>
+              <option value="12_months">12 Months</option>
+            </select>
+          </div>
+          <div class="form-group">
+              <button type="submit">Add Zumba Registration</button>
+          </div>
+      </form>
+  </div>
+  <table>
+      <!-- Table Headers -->
+      <thead>
+          <tr>
+              <th>Full Name</th>
+              <th>Phone Number</th>
+              <th>Gender</th>
+              <th>Date of Joining</th>
+              <th>Age</th>
+              <th>Payment Option</th>
+              <th>Action</th> <!-- Added action column for delete button -->
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Loop through Zumba registrations -->
+          {% for registration in all_zumba_registrations %}
+          <tr {% if forloop.counter > 3 %}class="hidden"{% endif %}>
+              <td>{{ registration.full_name }}</td>
+              <td>{{ registration.phone_number }}</td>
+              <td>{{ registration.gender }}</td>
+              <td>{{ registration.date_of_joining }}</td>
+              <td>{{ registration.age }}</td>
+              <td>{{ registration.payment_option }}</td>
+              <td>
+                  <!-- Form for deleting Zumba registration -->
+                  <form id="delete-zumba-registration-form-{{ registration.id }}" action="{% url 'delete_zumba_registration' registration.id %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" id="registration-id-input-{{ registration.id }}" name="registration_id" value="">
+                      <button type="button"class="delete-button" onclick="deleteZumbaRegistration('{{ registration.id }}')">Delete🗑</button>
+                  </form>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  <button id="zumba-registrations-table-show-more" onclick="toggleEntries('zumba-registrations-table')"style="background-color: #fea246;">↓ Show more</button>
+  <button id="zumba-registrations-table-show-less" style="display: none;background-color: #ff8000;" onclick="toggleLessEntries('zumba-registrations-table')">↑ Show less</button>
+</div>
+
+<div class="registration-category crossfit-registrations-table">
+  <h3>Crossfit Registrations</h3>
+  <div class="add-member-button-container">
+      <button id="add-crossfit-registration-button" onclick="toggleAddCrossfitRegistrationForm()">+Add</button>
+  </div>
+  <div id="add-crossfit-registration-form" class="hidden">
+      <h3>Add Crossfit Registration</h3>
+      <form method="post" action="{% url 'add_crossfit_registration' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name">
+        </div>
+        <div class="form-group">
+            <label for="date_of_joining">Date of Joining:</label>
+            <input type="date" id="date_of_joining" name="date_of_joining"> <!-- Calendar option -->
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>  
+        </div>
+        <div class="form-group">
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" id="phone_number" name="phone_number">
+        </div>
+        <div class="form-group">
+          <label for="payment_option">Selected Plan:</label>
+          <select id="payment_option" name="payment_option">
+            <option value="6_months">6 Months</option>
+            <option value="12_months">12 Months</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <button type="submit">Add Crossfit Registration</button>
+        </div>
+      </form>
+  </div>
+  <table>
+      <!-- Table Headers -->
+      <thead>
+          <tr>
+              <th>Full Name</th>
+              <th>Phone Number</th>
+              <th>Gender</th>
+              <th>Date of Joining</th>
+              <th>Age</th>
+              <th>Payment Option</th>
+              <th>Action</th> <!-- Added action column for delete button -->
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Loop through Crossfit registrations -->
+          {% for registration in all_crossfit_registrations %}
+          <tr {% if forloop.counter > 3 %}class="hidden"{% endif %}>
+              <td>{{ registration.full_name }}</td>
+              <td>{{ registration.phone_number }}</td>
+              <td>{{ registration.gender }}</td>
+              <td>{{ registration.date_of_joining }}</td>
+              <td>{{ registration.age }}</td>
+              <td>{{ registration.payment_option }}</td>
+              <td>
+                  <!-- Form for deleting Crossfit registration -->
+                  <form id="delete-crossfit-registration-form-{{ registration.id }}" action="{% url 'delete_crossfit_registration' registration.id %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" id="registration-id-input-{{ registration.id }}" name="registration_id" value="">
+                      <button type="button" class="delete-button"onclick="deleteCrossfitRegistration('{{ registration.id }}')">Delete 🗑</button>
+                  </form>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  <button id="crossfit-registrations-table-show-more" onclick="toggleEntries('crossfit-registrations-table')"style="background-color: #fea246;">↓ Show more</button>
+  <button id="crossfit-registrations-table-show-less" style="display: none;background-color: #ff8000;" onclick="toggleLessEntries('crossfit-registrations-table')">↑ Show less</button>
+</div>
+
+<div class="registration-category yoga-registrations-table">
+  <h3>Yoga Registrations</h3>
+  <div class="add-member-button-container">
+    <button id="add-yoga-registration-button" onclick="toggleAddYogaRegistrationForm()">+Add</button>
+  </div>
+  <div id="add-yoga-registration-form" class="hidden">
+    <h3>+Add</h3>
+    <form method="post" action="{% url 'add_yoga_registration' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="full_name">Full Name:</label>
+        <input type="text" id="full_name" name="full_name">
+      </div>
+      <div class="form-group">
+        <label for="date_of_joining">Date of Joining:</label>
+        <input type="date" id="date_of_joining" name="date_of_joining"> <!-- Calendar option -->
+      </div>
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age">
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number">
+      </div>
+      <div class="form-group">
+        <label for="payment_option">Selected Plan:</label>
+        <select id="payment_option" name="payment_option">
+          <option value="6_months">6 Months</option>
+          <option value="12_months">12 Months</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="submit">Add Yoga Registration</button>
+      </div>
+    </form>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Phone Number</th>
+        <th>Gender</th>
+        <th>Date of Joining</th>
+        <th>Age</th>
+        <th>Payment Option</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through Yoga registrations -->
+      {% for registration in all_yoga_registrations %}
+      <tr {% if forloop.counter > 3 %}class="hidden"{% endif %}>
+        <td>{{ registration.full_name }}</td>
+        <td>{{ registration.phone_number }}</td>
+        <td>{{ registration.gender }}</td>
+        <td>{{ registration.date_of_joining }}</td>
+        <td>{{ registration.age }}</td>
+        <td>{{ registration.payment_option }}</td>
+        <td>
+          <form id="delete-yoga-registration-form-{{ registration.id }}" action="{% url 'delete_yoga_registration' registration.id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="registration-id-input-{{ registration.id }}" name="registration_id" value="">
+            <button type="button" class="delete-button"onclick="deleteYogaRegistration('{{ registration.id }}')">Delete🗑</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button id="yoga-registrations-table-show-more" onclick="toggleEntries('yoga-registrations-table')"style="background-color: #fea246;">↓Show more</button>
+  <button id="yoga-registrations-table-show-less" style="display: none; background-color: #ff8000;" onclick="toggleLessEntries('yoga-registrations-table')">↑ Show less</button>
+</div>
+
+    <script>
+      var addMemberFormVisible = false;
+
+      function toggleAddMemberForm() {
+        var addMemberForm = document.getElementById('add-member-form');
+        var addMemberButton = document.getElementById('add-member-button');
+
+        addMemberFormVisible = !addMemberFormVisible;
+
+        if (addMemberFormVisible) {
+          addMemberForm.classList.remove('hidden');
+          addMemberButton.textContent = 'Hide Form';
+        } else {
+          addMemberForm.classList.add('hidden');
+          addMemberButton.textContent = 'Add Member';
+        }
+      }
+
+      function toggleEntries(tableName) {
+        var table = document.querySelector('.' + tableName + ' table');
+        var rows = table.querySelectorAll('tbody tr');
+        var showMoreBtn = document.getElementById(tableName + '-show-more');
+        var showLessBtn = document.getElementById(tableName + '-show-less');
+
+        for (var i = 3; i < rows.length; i++) {
+          if (rows[i].classList.contains('hidden')) {
+            rows[i].classList.remove('hidden');
+            showMoreBtn.textContent = 'Show less';
+            showLessBtn.style.display = '';
+          } else {
+            rows[i].classList.add('hidden');
+            showMoreBtn.textContent = 'Show more';
+            showLessBtn.style.display = 'none';
+          }
+        }
+      }
+      function toggleLessEntries(tableName) {
+        var table = document.querySelector('.' + tableName + ' table');
+        var rows = table.querySelectorAll('tbody tr');
+        var showMoreBtn = document.getElementById(tableName + '-show-more');
+        var showLessBtn = document.getElementById(tableName + '-show-less');
+
+        for (var i = 3; i < rows.length; i++) {
+          if (!rows[i].classList.contains('hidden')) {
+            rows[i].classList.add('hidden');
+          }
+        }
+
+        showMoreBtn.textContent = 'Show more';
+        showLessBtn.style.display = 'none';
+      }
+      function deleteMember(memberId) {
+  // Show confirmation dialog
+  if (confirm("Are you sure you want to delete this member?")) {
+    console.log("Delete button clicked");
+    // Get the form element
+    var form = document.getElementById('delete-member-form-' + memberId);
+    
+    // Set the value of the hidden input field to the member ID
+    document.getElementById('member-id-input-' + memberId).value = memberId;
+    console.log("Member ID set:", memberId);
+    
+    // Submit the form
+    console.log("Submitting form...");
+    form.submit();
+  }
+}
+function toggleAddTrainerForm() {
+  var addTrainerForm = document.getElementById('add-trainer-form');
+  var addTrainerButton = document.getElementById('add-trainer-button');
+
+  addTrainerForm.classList.toggle('hidden');
+  addTrainerButton.textContent = addTrainerForm.classList.contains('hidden') ? 'Add Trainer' : 'Hide Form';
+}
+
+function deleteTrainer(trainerId) {
+  // Show confirmation dialog
+  if (confirm("Are you sure you want to delete this trainer?")) {
+    // Get the form element
+    var form = document.getElementById('delete-trainer-form-' + trainerId);
+    
+    // Set the value of the hidden input field to the trainer ID
+    document.getElementById('trainer-id-input-' + trainerId).value = trainerId;
+    
+    // Submit the form
+    form.submit();
+  }
+}
+function toggleAddKickboxingRegistrationForm() {
+  var addKickboxingRegistrationForm = document.getElementById('add-kickboxing-registration-form');
+  var addKickboxingRegistrationButton = document.getElementById('add-kickboxing-registration-button');
+
+  addKickboxingRegistrationForm.classList.toggle('hidden');
+  addKickboxingRegistrationButton.textContent = addKickboxingRegistrationForm.classList.contains('hidden') ? 'Add Kickboxing Registration' : 'Hide Form';
+}
+
+function deleteKickboxingRegistration(registrationId) {
+  // Show confirmation dialog
+  if (confirm("Are you sure you want to delete this Kickboxing registration?")) {
+    // Get the form element
+    var form = document.getElementById('delete-kickboxing-registration-form-' + registrationId);
+    
+    // Set the value of the hidden input field to the registration ID
+    document.getElementById('registration-id-input-' + registrationId).value = registrationId;
+    
+    // Submit the form
+    form.submit();
+  }
+}
+function toggleAddFreePassRequestForm() {
+    var addFreePassRequestForm = document.getElementById('add-free-pass-request-form');
+    var addFreePassRequestButton = document.getElementById('add-free-pass-request-button');
+
+    addFreePassRequestForm.classList.toggle('hidden');
+    addFreePassRequestButton.textContent = addFreePassRequestForm.classList.contains('hidden') ? 'Add Free Pass Request' : 'Hide Form';
+  }
+
+  function deleteFreePassRequest(requestId) {
+    // Show confirmation dialog
+    if (confirm("Are you sure you want to delete this free pass request?")) {
+      // Get the form element
+      var form = document.getElementById('delete-free-pass-request-form-' + requestId);
+
+      // Set the value of the hidden input field to the request ID
+      document.getElementById('request-id-input-' + requestId).value = requestId;
+
+      // Submit the form
+      form.submit();
+    }
+  }
+  function toggleAddZumbaRegistrationForm() {
+    var addZumbaRegistrationForm = document.getElementById('add-zumba-registration-form');
+    var addZumbaRegistrationButton = document.getElementById('add-zumba-registration-button');
+
+    addZumbaRegistrationForm.classList.toggle('hidden');
+    addZumbaRegistrationButton.textContent = addZumbaRegistrationForm.classList.contains('hidden') ? 'Add Zumba Registration' : 'Hide Form';
+}
+
+function deleteZumbaRegistration(registrationId) {
+    // Show confirmation dialog
+    if (confirm("Are you sure you want to delete this Zumba registration?")) {
+        // Get the form element
+        var form = document.getElementById('delete-zumba-registration-form-' + registrationId);
+
+        // Set the value of the hidden input field to the registration ID
+        document.getElementById('registration-id-input-' + registrationId).value = registrationId;
+
+        // Submit the form
+        form.submit();
+    }
+}
+function toggleAddCrossfitRegistrationForm() {
+    var addCrossfitRegistrationForm = document.getElementById('add-crossfit-registration-form');
+    var addCrossfitRegistrationButton = document.getElementById('add-crossfit-registration-button');
+
+    addCrossfitRegistrationForm.classList.toggle('hidden');
+    addCrossfitRegistrationButton.textContent = addCrossfitRegistrationForm.classList.contains('hidden') ? 'Add Crossfit Registration' : 'Hide Form';
+}
+
+function deleteCrossfitRegistration(registrationId) {
+    // Show confirmation dialog
+    if (confirm("Are you sure you want to delete this Crossfit registration?")) {
+        // Get the form element
+        var form = document.getElementById('delete-crossfit-registration-form-' + registrationId);
+
+        // Set the value of the hidden input field to the registration ID
+        document.getElementById('registration-id-input-' + registrationId).value = registrationId;
+
+        // Submit the form
+        form.submit();
+    }
+}
+function toggleAddYogaRegistrationForm() {
+    var addYogaRegistrationForm = document.getElementById('add-yoga-registration-form');
+    var addYogaRegistrationButton = document.getElementById('add-yoga-registration-button');
+
+    addYogaRegistrationForm.classList.toggle('hidden');
+    addYogaRegistrationButton.textContent = addYogaRegistrationForm.classList.contains('hidden') ? 'Add Yoga Registration' : 'Hide Form';
+}
+
+function deleteYogaRegistration(registrationId) {
+    // Show confirmation dialog
+    if (confirm("Are you sure you want to delete this Yoga registration?")) {
+        // Get the form element
+        var form = document.getElementById('delete-yoga-registration-form-' + registrationId);
+
+        // Set the value of the hidden input field to the registration ID
+        document.getElementById('registration-id-input-' + registrationId).value = registrationId;
+
+        // Submit the form
+        form.submit();
+    }
+}
+
+
+
+
+    </script>
+  </div>
+
+</body>
+
+</html>
+

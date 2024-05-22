@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'assets/img/bbg.jpg' %}"); /* Add background image */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background */
+        }
+        
+        .container {
+            max-width: 600px; /* Set maximum width of the content */
+            margin: 0 auto; /* Center the content horizontally */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Add semi-transparent background color to the container */
+            border-radius: 10px; /* Add border radius for a rounded look */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+        }
+
+        .image {
+            width: 100%; /* Adjust width as needed */
+            max-width: 400px; /* Increase maximum width */
+            height: auto; /* Maintain aspect ratio */
+            display: block;
+            margin: 0 auto; /* Center image horizontally */
+            margin-bottom: 20px; /* Add space between images */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img class="image" src="{% static 'assets/img/maaz.png' %}" alt="Image">
+    
+    <img class="image" src="{% static 'assets/img/yashh.png' %}" alt="Image">
+
+    <img class="image" src="{% static 'assets/img/rohann.png' %}" alt="Image">
+
+    <img class="image" src="{% static 'assets/img/chashak.png' %}" alt="Image">
+
+</div>
+
+</body>
+</html>
